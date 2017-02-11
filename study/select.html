@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" data-ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>select用法  ng-options 和ng-repeat 区别</title>
+    <script src="lib/angular.min.js"></script>
+
+</head>
+<body>
+<div ng-controller="myCtrl">
+    <select ng-model="selectedCar" ng-options="x for (x, y) in cars"></select>
+    <!--ng-options 选的是一个对象 key value  里面去一个方式来显示在页面 可以是key car01 02 03  也可以是value brand model color 等-->
+    <!--<select ng-model="selectedCar" ng-options="y.brand for (x, y) in cars"></select>-->
+    <!--<select ng-model="selectedCar" ng-options="y.model for (x, y) in cars"></select>-->
+    <!--<select ng-model="selectedCar" ng-options="y.color for (x, y) in cars"></select>-->
+
+    <h1>你选择的是: {{selectedCar.brand}}</h1>
+    <h2>模型: {{selectedCar.model}}</h2>
+    <h3>颜色: {{selectedCar.color}}</h3>
+</div>
+
+<div ng-controller="myCtrl1">
+
+    <select ng-model="selected1">
+        <option ng-repeat="x in cars" value="{{x.model}}">{{x.brand}}</option>
+    </select>
+
+    <h1>你选择的是: {{selected1}}  这里的显示是根据 option的 value来变化的  value 绑定x.model x.brand x.color</h1>
+    <h2>模型: {{selected1}}  ng-repeat 选择的是一个数据 没有对象这么灵活 可以显示很多数据</h2>
+    <h3>颜色: {{selected1}}</h3>
+</div>
+
+<script>
+    var app = angular.module("myApp",[]);
+    app.controller('myCtrl', function($scope) {
+        $scope.cars = {
+            car01 : {brand : "Ford", model : "Mustang", color : "red"},
+            car02 : {brand : "Fiat", model : "500", color : "white"},
+            car03 : {brand : "Volvo", model : "XC90", color : "black"}
+        }
+    });
+    app.controller('myCtrl1', function($scope) {
+        $scope.cars = [{brand : "Ford", model : "Mustang", color : "red"},
+                        {brand : "Fiat", model : "500", color : "white"},
+                        {brand : "Volvo", model : "XC90", color : "black"}]
+        });
+</script>
+</body>
+</html>

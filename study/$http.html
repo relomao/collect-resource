@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" data-ng-app="myApp" >
+<head>
+    <meta charset="UTF-8">
+    <title>$http用法</title>
+    <script src="lib/angular.min.js"></script>
+</head>
+<body>
+<div ng-controller="contr">
+    <ul>
+        <li ng-repeat="content in contents">
+            {{content.a+ "&nbsp;左边是a，右边是b&nbsp;" +content.b}}
+        </li>
+    </ul>
+</div>
+
+<script>
+    var app = angular.module("myApp",[]);
+
+    app.controller("contr",function($scope,$http){
+        $http({
+            method:"post",
+            url:"1.php"
+
+            //以下代码用于 php服务器接收数据 或者直接在 app.config 中配置 (如下)
+            //data:{a:"",b:""}
+            /*headers:{'Content-Type': 'application/x-www-form-urlencoded'},   //get方式不需要 header  post方式需要
+            // jquery post php服务器直接受到 a=1&b=2 ,angular post  php服务器收到 a=1 b=2 以下代码是在a=1和b=2中加&
+            transformRequest: function(obj) {
+                var str = [];
+                for(var p in obj){
+                    str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                }
+                return str.join("&");
+
+            }*/
+        }).success(function(msg){
+            $scope.contents=msg.jsoncont
+        })
+    });
+    /*app.config(function($httpProvider){
+
+        $httpProvider.defaults.transformRequest = function(obj){
+            var str = [];
+            for(var p in obj){
+                str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+            }
+            return str.join("&");
+        }
+
+        $httpProvider.defaults.headers.post = {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
+
+    });*/
+</script>
+</body>
+</html>
