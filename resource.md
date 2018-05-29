@@ -17,3 +17,7 @@
 ## css
 * ### `css3 按钮动画`
   * [文档地址](http://fian.my.id/Waves/#examples)
+
+##  mock
+* ### `easy mock`
+  * [文档地址](https://www.easy-mock.com)
