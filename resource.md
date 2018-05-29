@@ -21,3 +21,7 @@
 ##  mock
 * ### `easy mock` mock 数据
   * [文档地址](https://www.easy-mock.com)
+  
+## blog
+* ### `async await 应用`  异步解决方案
+  * [blog 地址](https://www.cnblogs.com/liusixin/p/6727060.html)
